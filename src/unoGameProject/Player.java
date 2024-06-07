@@ -27,6 +27,7 @@ public class Player extends Person {
 		}
 	}
 	
+	// Allows the user to pick a card to play
 	@Override
 	public Color chooseCard(Card topCard, Deck deck, Deck discardPile, Color currentColor, boolean light) {
 		Scanner input = new Scanner(System.in);

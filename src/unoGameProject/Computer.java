@@ -31,6 +31,7 @@ public class Computer extends Person {
 		return(playableCards);
 	}
 
+	// Picks a card for the computer
 	@Override
 	public Color chooseCard(Card topCard, Deck discardPile, Deck deck, Color currentColor, boolean light) {
 		ArrayList<Card> playableCards = checkPlayableCards(topCard, currentColor);

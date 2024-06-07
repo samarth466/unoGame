@@ -26,6 +26,7 @@ public class Game {
 		startGame();
 	}
 	
+	// Initializes instance variables that must be re-initialized at the beginning of each round
 	private void setInitialGameState() {
 		deck = new Deck(true);
 		discardPile = new Deck();
@@ -43,6 +44,7 @@ public class Game {
 		allPlayers.add(player);
 	}
 	
+	// Handles the logic for a single game
 	private void startGame() {
 		while (true) {
 			Person winningPlayer = startRound();
@@ -55,15 +57,15 @@ public class Game {
 			}
 			System.out.println(winningPlayer + " wins the round with " + totalScore + " points for a total score of " + scores.get(allPlayers.indexOf(winningPlayer)) + " points.");
 			scores.set(allPlayers.indexOf(winningPlayer),scores.get(allPlayers.indexOf(winningPlayer))+totalScore);
-			setInitialGameState();
-			for (int score: scores) {
-				if (score >= thresholdScore) {
-					break;
-				}
+			if (scores.get(allPlayers.indexOf(winningPlayer)) >= thresholdScore) {
+				System.out.println(winningPlayer + " won the game with " + scores.get(allPlayers.indexOf(winningPlayer)));
+				break;
 			}
+			setInitialGameState();
 		}
 	}
 	
+	// Handles the logic for a single round and returns the winning player
 	private Person startRound() {
 		randomizePlayerOrder();
 		System.out.println(allPlayers.get(1) + " goes first.");
@@ -101,6 +103,7 @@ public class Game {
 				playerIndex = checkCard(currentCard,playerIndex, person, currentColor,light,allPlayers);
 				light = isPlayingLightSide();
 				checkedCard = true;
+				continue;
 			}
 			currentColor = person.chooseCard(currentCard,discardPile,deck,currentColor,light);
 			if (discardPile.getCards().get(discardPile.size()-1) != currentCard) {
@@ -124,6 +127,7 @@ public class Game {
 		}
 	}
 	
+	// Randomizes the playing order
 	private void randomizePlayerOrder() {
 		ArrayList<Person> newOrder = new ArrayList<Person>();
 		while (!allPlayers.isEmpty()) {
