@@ -47,7 +47,9 @@ public class Player extends Person {
 							System.out.println("You drew: " + card);
 							if (cardIsPlayable(topCard,currentColor, card)) {
 								System.out.println("Press 1 if you'd like to play this card, 0 otherwise");
-								if (input.nextInt() == 1) {
+								int userChoice = input.nextInt();
+								input.nextLine();
+								if (userChoice == 1) {
 									super.getHand().removeCard(card);
 									discardPile.add(card);
 									super.getHand().removeCard(card);
